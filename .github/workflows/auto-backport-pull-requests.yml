@@ -29,7 +29,7 @@ jobs:
 
       - name: Create pull requests
         run: |
-          assignee=$(ci/auto-pr/fetch-gh-user-info "${{ github.event.repository.owner.login }}" "${{ github.event.repository.name }}" "${{ github.event.pull_request.user.login }}")
+          assignee=$(ci/auto-backport-pull-requests/fetch-gh-user-info "${{ github.event.repository.owner.login }}" "${{ github.event.repository.name }}" "${{ github.event.pull_request.user.login }}")
           echo -------------
           echo "assignee: $assignee"
           echo -------------
@@ -40,19 +40,19 @@ jobs:
             new_pr_assignee="${{ github.event.pull_request.user.login }}"
           fi
 
-          versions=$(ci/auto-pr/fetch-gh-proj-versions "${{ github.event.repository.owner.login }}" "${{ github.event.repository.name }}" "${{ github.event.number }}")
+          versions=$(ci/auto-backport-pull-requests/fetch-gh-proj-versions "${{ github.event.repository.owner.login }}" "${{ github.event.repository.name }}" "${{ github.event.number }}")
           echo -------------
           echo "versions: $versions"
           echo -------------
 
-          branches=$(ci/auto-pr/conv-proj-version-to-branch $versions)
+          branches=$(ci/auto-backport-pull-requests/conv-proj-version-to-branch $versions)
           # Remove the base branch from the list because the target change is already merged to the branch.
           branches=$(echo "$branches" | sed "/^${{ github.base_ref }}$/d")
           echo -------------
           echo "branches: $branches"
           echo -------------
 
-          ci/auto-pr/create-pull-requests \
+          ci/auto-backport-pull-requests/create-pull-requests \
             "${{ github.event.number }}" \
             "${{ github.event.pull_request.html_url }}" \
             "$PR_TITLE" \
