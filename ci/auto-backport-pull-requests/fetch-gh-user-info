@@ -3,16 +3,16 @@
 set -e -o pipefail; [[ -n "$DEBUG" ]] && set -x
 
 if [[ $# -ne 3 ]]; then
-    echo "usage: $0 josh-wong sandbox-auto-backport-pull-requests josh-wong"
+    echo "usage: $0 repo_owner repo_name user"
     exit 1
 fi
 
-josh-wong=$1
-sandbox-auto-backport-pull-requests=$2
-josh-wong=$3
+repo_owner=$1
+repo_name=$2
+user=$3
 
 # Get the author of the merged PR
-author_json=$(gh api graphql -F josh-wong=$owner -F sandbox-auto-backport-pull-requests=$repoName -F josh-wong=$userName -f query='
+author_json=$(gh api graphql -F owner=josh-wong -F repoName=sandbox-auto-backport-pull-requests -F userName=josh-wong -f query='
   query($owner: String!, $repoName: String!, $userName: String!) {
     repository(owner: $owner, name: $repoName) {
       assignableUsers(first: 100, query: $userName) {
