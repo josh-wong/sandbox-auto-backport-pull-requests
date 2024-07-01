@@ -12,7 +12,7 @@ repo_name=$2
 user=$3
 
 # Get the author of the merged PR
-author_json=$(gh api graphql -F owner=josh-wong -F repoName=sandbox-auto-backport-pull-requests -F userName=josh-wong -f query='
+author_json=$(gh api graphql -F owner=$repo_owner -F repoName=$repo_name -F userName=$user -f query='
   query($owner: String!, $repoName: String!, $userName: String!) {
     repository(owner: $owner, name: $repoName) {
       assignableUsers(first: 100, query: $userName) {

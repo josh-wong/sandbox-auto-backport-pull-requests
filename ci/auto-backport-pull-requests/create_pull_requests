@@ -41,7 +41,7 @@ function cherry_pick_and_create_pull_request () {
   git status
   gh pr create --assignee $assignee \
     --base "$branch" \
-    --title "Backport to branch ($branch): $pull_request_title" \
+    --title "Backport to branch($branch) : $pull_request_title" \
     --body "Backport of $pull_request_url"
 }
 
@@ -49,7 +49,7 @@ function create_issue () {
   local branch=$1
 
   gh issue create --assignee $assignee \
-    --title "Backport to branch ($branch) failed: $pull_request_title" \
+    --title "Backport to branch($branch) failed: $pull_request_title" \
     --body "Backport of $pull_request_url to branch($branch) failed"
 }
 

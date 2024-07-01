@@ -9,18 +9,18 @@ versions.inject(Set.new) {|acc, v|
 
   if patch_version == "0"
     if minor_version == "0"
-      # e.g. project: "Sandbox 4.0.0" -> branch: "main"
+      # e.g. project: "ScalarDB 4.0.0" -> branch: "master"
       #
-      # This GitHub project corresponds to `main` branch.
+      # This GitHub project corresponds to `main`/`master` branch.
       acc << "main"
     else
-      # e.g. project: "Sandbox 3.8.0" -> branch: "3"
+      # e.g. project: "ScalarDB 3.8.0" -> branch: "3"
       #
       # This GitHub project corresponds to a support branch.
       acc << major_version
     end
   else
-    # e.g. project: "Sandbox 3.7.1" -> branch: "3.7"
+    # e.g. project: "ScalarDB 3.7.1" -> branch: "3.7"
     #
     # This GitHub project corresponds to a release branch.
     acc << "#{major_version}.#{minor_version}"
