@@ -16,7 +16,7 @@ jobs:
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     env:
-      GH_TOKEN: ${{ secrets.GH_PR_PAT }}
+      GITHUB_TOKEN: ${{ secrets.GH_PR_PAT }}
       # Escape the PR title. See https://docs.github.com/en/actions/security-guides/security-hardening-for-github-actions#using-an-intermediate-environment-variable for details
       PR_TITLE: ${{ github.event.pull_request.title }}
     steps:
